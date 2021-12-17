@@ -1,0 +1,12 @@
+---
+- name: install multiple packages on slaves using with_items option
+  hosts: all
+  become: true
+  gather_facts: yes
+  
+
+  tasks:
+    - name: install packages  
+      yum:
+        name: [ 'git' ]
+        state: present
