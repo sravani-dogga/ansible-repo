@@ -1,0 +1,17 @@
+---
+- name: install multiple packages on slaves
+  hosts: all
+  become: true
+  gather_facts: yes
+
+  tasks:
+   - name: install packages
+     yum:
+       name: "{{ item }}"
+       state: absent
+     with_items:
+          - git
+          - vsftpd
+          - wget
+          - httpd
+          - nfs-utils
