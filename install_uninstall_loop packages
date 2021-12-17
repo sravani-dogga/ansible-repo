@@ -1,0 +1,17 @@
+---
+- name: install/uninstall multiple packages on slaves using loop
+  hosts: all
+  become: true
+  gather_facts: yes
+
+  tasks:
+   - name: install/uninstall packages
+     yum:
+       name: "{{ item.sampath }}"
+       state: "{{ item.setup }}"
+     loop:
+       - { sampath: 'httpd' , setup: 'installed' }
+       - { sampath: 'vsftpd' , setup: 'installed' }
+
+       - { sampath: 'wget' , setup: 'removed' }
+       - { sampath: 'tree' , setup: 'absent' }
