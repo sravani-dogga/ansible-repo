@@ -1,0 +1,22 @@
+---
+- name: installing httpd package
+  hosts: all
+  become: true
+  gather_facts: yes
+
+  tasks: 
+  - name: installing httpd on redhat
+    yum:
+      name: httpd
+      state: installed
+    notify: start httpd services
+
+  - copy:
+      src: /home/sampath/playbooks/index.html
+      dest: /var/www/html
+
+  handlers:
+  - name: start httpd services
+    service: 
+      name: httpd
+      state: started
