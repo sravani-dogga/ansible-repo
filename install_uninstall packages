@@ -1,0 +1,16 @@
+---
+- name: install multiple packages on slaves
+  hosts: all
+  become: true
+  gather_facts: yes
+
+  tasks:
+   - name: install packages
+     yum:
+       name: [ 'tree' , 'wget' ]
+       state: present
+
+   - name: uninstall packages
+     yum:
+       name: [ 'vsftpd' , 'httpd']
+       state: absent
